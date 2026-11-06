@@ -1,0 +1,113 @@
+# Synthetic population for a payer goals demo.
+# Every row is fake. There is no PHI.
+#
+# Public facts from the Sprinter Health job post are context only.
+# They are not targets and they are not page metrics.
+# The post says Sprinter has served more than 2 million patients,
+# completed more than 130,000 in-home visits, holds a 92 NPS,
+# and works in 22 states. This file does not scale the fake plan to those totals.
+#
+# Harborline Health Plan is a made-up regional plan. Northwind Mutual and
+# Cedar Ridge Health exist so tests can prove the page marts drop them.
+# The page publishes Harborline only.
+
+seed: 20261106
+as_of: 2026-11-06
+history_start: 2025-11-07
+period_start: 2026-10-01
+period_end: 2026-12-31
+quarter_label: Q4 2026
+example_payer_id: payer_harborline
+on_track_ratio: 0.95
+at_risk_ratio: 0.80
+
+# Days elapsed counts the period start and the as-of date.
+# Q4 2026 has 92 days. Nov 6 is day 37.
+
+payers:
+  - id: payer_harborline
+    name: Harborline Health Plan
+    is_example: 1
+    members: 8000
+  - id: payer_northwind
+    name: Northwind Mutual
+    is_example: 0
+    members: 3200
+  - id: payer_cedarridge
+    name: Cedar Ridge Health
+    is_example: 0
+    members: 2600
+
+states: [TX, CA, AZ, NV]
+lines_of_business: [medicare, medicaid, commercial]
+visit_types: [preventive, chronic, post_discharge]
+sources: [pcp, health_plan, discharge]
+
+# Harborline quarter through the as-of date.
+# These quotas are generation settings. The page prints the warehouse result.
+# 640 completed and 180 missed means a 78% completion rate against an 85% goal.
+# Durations are built so the median of the 640 completed visits is 8 days.
+# The median goal is 7 days, so this lands in the at-risk band.
+harborline_quarter:
+  completed_visits: 640
+  canceled_visits: 115
+  no_show_visits: 65
+  # Subset of completed_visits. Each one closes a preventive gap.
+  closing_gap_visits: 150
+  closing_gap_last_day: 2026-10-25
+  missed_last_day: 2026-10-18
+  duration_low: 2
+  duration_high: 21
+  duration_median: 8
+
+# Open gaps are the overdue definition. A member is overdue when a preventive
+# or chronic gap is due on or before the as-of date and is not closed yet.
+# Post-discharge is not an overdue gap.
+# 500 + 220 = 720 open members, against a ceiling of 500.
+overdue:
+  open_preventive_count: 500
+  open_preventive_due: 2026-05-15
+  open_chronic_count: 220
+  open_chronic_due: 2026-09-20
+  closed_count: 150
+  closed_due: 2026-08-01
+
+# An ER hint is a utilization flag, not a causal model.
+# It counts a member when an ER date falls 5 to 12 days after a missed
+# home visit in the quarter, and no completed home visit sits between them.
+# The generator places these misses on or before Oct 18 so the ER date
+# still falls on or before Nov 6.
+er_after_miss:
+  members: 48
+  min_days_after: 5
+  max_days_after: 12
+
+# Referrals with no visit row, referred 20 days before the as-of date.
+waiting_referrals:
+  count: 90
+  age_days: 20
+
+# About 12 months of history before the quarter, plus scheduled visits
+# after the as-of date. Those future rows stay out of completion and pace.
+history:
+  completed_per_day: 6
+  missed_per_day: 1
+future:
+  scheduled_per_day: 12
+
+# Other payers are smaller and are not on the page.
+# Members 0-79 keep an open gap and do not get a closing visit.
+background:
+  completed_per_day: 3
+  missed_per_day: 1
+  open_gaps: 80
+  open_gap_due: 2026-03-01
+  er_events: 15
+
+# A little mess on Northwind only, so staging has a job to do.
+# Harborline quarter rows stay clean so the median stays locked.
+mess:
+  duplicate_visits: 5
+  blank_visit_types: 4
+  clock_skew_visits: 3
+  uppercase_status: 2

@@ -1,0 +1,170 @@
+version: 2
+
+semantic_models:
+  - name: completed_visits
+    description: >
+      One completed in-home visit for the example payer.
+      The quarter starts on period start and stops on the as-of date.
+      Other payers are not in this model.
+    model: ref('fct_completed_visits')
+    defaults:
+      agg_time_dimension: completed_on
+    entities:
+      - name: visit
+        type: primary
+        expr: visit_id
+      - name: member
+        type: foreign
+        expr: member_id
+      - name: payer
+        type: foreign
+        expr: payer_id
+    dimensions:
+      - name: completed_on
+        type: time
+        type_params:
+          time_granularity: day
+      - name: visit_type
+        type: categorical
+      - name: referral_source
+        type: categorical
+    measures:
+      - name: completed_visits
+        description: Completed in-home visits in the quarter window.
+        agg: count
+        expr: visit_id
+      - name: median_days_to_complete
+        description: Median days from the referral to the completed visit.
+        agg: median
+        expr: days_to_complete
+
+  - name: terminal_visits
+    description: >
+      One finished visit in the quarter window.
+      Finished means completed, canceled, or no-show.
+      A visit that is still scheduled is not in this model.
+    model: ref('fct_terminal_visits')
+    defaults:
+      agg_time_dimension: outcome_on
+    entities:
+      - name: visit
+        type: primary
+        expr: visit_id
+      - name: payer
+        type: foreign
+        expr: payer_id
+    dimensions:
+      - name: outcome_on
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+    measures:
+      - name: terminal_visits
+        description: Finished visits in the quarter window.
+        agg: count
+        expr: visit_id
+
+  - name: members
+    description: >
+      One member for the example payer.
+      is_overdue is 1 when a preventive or chronic gap is due and still open.
+    model: ref('fct_members')
+    defaults:
+      agg_time_dimension: enrolled_on
+    entities:
+      - name: member
+        type: primary
+        expr: member_id
+      - name: payer
+        type: foreign
+        expr: payer_id
+    dimensions:
+      - name: enrolled_on
+        type: time
+        type_params:
+          time_granularity: day
+      - name: state_code
+        type: categorical
+      - name: line_of_business
+        type: categorical
+    measures:
+      - name: overdue_members
+        description: Members with an open preventive or chronic gap.
+        agg: sum
+        expr: is_overdue
+      - name: members
+        description: Members on the example payer.
+        agg: count
+        expr: member_id
+
+  - name: er_after_miss
+    description: >
+      One example-payer member with an ER event 1 to 30 days after a missed
+      home visit in the quarter, and no completed home visit between them.
+      This is a utilization hint, not a causal finding.
+    model: ref('fct_er_after_miss')
+    defaults:
+      agg_time_dimension: event_on
+    entities:
+      - name: member
+        type: primary
+        expr: member_id
+      - name: payer
+        type: foreign
+        expr: payer_id
+    dimensions:
+      - name: event_on
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: er_after_miss_members
+        description: Members with an ER visit after a missed home visit.
+        agg: count
+        expr: member_id
+
+metrics:
+  - name: visits_completed
+    label: Visits completed
+    description: Completed in-home visits for the example payer from the quarter start through the as-of date.
+    type: simple
+    type_params:
+      measure: completed_visits
+
+  - name: median_days_to_completed_visit
+    label: Median days to a completed visit
+    description: Median days from the referral date to the completed visit, for completed visits in the quarter window.
+    type: simple
+    type_params:
+      measure: median_days_to_complete
+
+  - name: members_overdue
+    label: Members overdue
+    description: Members with a preventive or chronic gap that is due on or before the as-of date and is not closed yet.
+    type: simple
+    type_params:
+      measure: overdue_members
+
+  - name: terminal_visits
+    label: Finished visits
+    description: Visits in the quarter window that are completed, canceled, or no-show. This is the denominator of visit completion.
+    type: simple
+    type_params:
+      measure: terminal_visits
+
+  - name: visit_completion_rate
+    label: Visit completion rate
+    description: Completed visits divided by finished visits in the quarter window. Scheduled visits are not in the rate.
+    type: ratio
+    type_params:
+      numerator: visits_completed
+      denominator: terminal_visits
+
+  - name: er_after_missed_visit_members
+    label: ER after a missed visit
+    description: Members with an ER event 1 to 30 days after a missed home visit in the quarter, and no completed home visit between the miss and the ER event.
+    type: simple
+    type_params:
+      measure: er_after_miss_members

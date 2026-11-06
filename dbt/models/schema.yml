@@ -1,0 +1,403 @@
+version: 2
+
+models:
+  - name: metric_time_spine
+    description: One row per day from the history start through the quarter end.
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        granularity: day
+        data_tests: [unique, not_null]
+
+  - name: stg_payers
+    description: One row per synthetic payer, including the two payers the page does not show.
+    columns:
+      - name: payer_id
+        data_tests: [unique, not_null]
+      - name: payer_name
+        data_tests: [not_null]
+      - name: is_example
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: stg_members
+    description: One row per synthetic member. These are not real people.
+    columns:
+      - name: member_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_payers')
+                field: payer_id
+      - name: state_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["TX", "CA", "AZ", "NV"]
+      - name: line_of_business
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["medicare", "medicaid", "commercial"]
+
+  - name: stg_referrals
+    description: One row per referral after types are kept as sent.
+    columns:
+      - name: referral_id
+        data_tests: [unique, not_null]
+      - name: member_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_members')
+                field: member_id
+      - name: visit_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["preventive", "chronic", "post_discharge"]
+      - name: referral_source
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["pcp", "health_plan", "discharge"]
+
+  - name: stg_visits
+    description: One row per visit after the latest ingest wins. Status is lower case.
+    columns:
+      - name: visit_id
+        data_tests: [unique, not_null]
+      - name: referral_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_referrals')
+                field: referral_id
+      - name: member_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_members')
+                field: member_id
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["scheduled", "completed", "canceled", "no_show"]
+
+  - name: stg_care_gaps
+    description: One row per preventive or chronic gap. Closed gaps have a closed date.
+    columns:
+      - name: gap_id
+        data_tests: [unique, not_null]
+      - name: member_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_members')
+                field: member_id
+      - name: gap_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["preventive", "chronic"]
+      - name: due_on
+        data_tests: [not_null]
+
+  - name: stg_er_events
+    description: One row per synthetic ER event tied to a missed visit.
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+      - name: missed_visit_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_visits')
+                field: visit_id
+
+  - name: stg_goals
+    description: One row per quarter goal and its target. The page does not store a second target.
+    columns:
+      - name: goal_id
+        data_tests: [unique, not_null]
+      - name: metric_kind
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["pace", "snapshot"]
+      - name: direction
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["higher", "lower"]
+      - name: target_value
+        data_tests: [not_null]
+
+  - name: stg_calendar
+    description: Quarter bounds and the 0.95 and 0.80 status cutoffs.
+    columns:
+      - name: period_start
+        data_tests: [not_null]
+      - name: days_in_period
+        data_tests: [not_null]
+
+  - name: stg_generation_meta
+    description: One row of seed, as-of date, and history start.
+    columns:
+      - name: seed
+        data_tests: [unique, not_null]
+      - name: as_of
+        data_tests: [not_null]
+
+  - name: stg_weeks
+    description: Complete Monday to Sunday weeks used for sparklines. The open week is not here.
+    columns:
+      - name: week_start
+        data_tests: [unique, not_null]
+      - name: week_end
+        data_tests: [not_null]
+
+  - name: int_calendar
+    description: One row with the quarter, the as-of date, and the day counts.
+    columns:
+      - name: as_of
+        data_tests: [not_null]
+      - name: days_elapsed
+        data_tests: [not_null]
+      - name: example_payer_id
+        data_tests: [not_null]
+
+  - name: int_visits
+    description: One row per visit for every payer, with the referral clock repaired.
+    columns:
+      - name: visit_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests: [not_null]
+      - name: visit_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["preventive", "chronic", "post_discharge"]
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["scheduled", "completed", "canceled", "no_show"]
+
+  - name: int_members
+    description: One row per member for every payer. is_overdue is 1 when a preventive or chronic gap is open.
+    columns:
+      - name: member_id
+        data_tests: [unique, not_null]
+      - name: is_overdue
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: int_er_after_miss
+    description: ER events 1 to 30 days after a missed visit, with no completed home visit between them. All payers.
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests: [not_null]
+
+  - name: dim_payer
+    description: The one payer this build is allowed to publish.
+    columns:
+      - name: payer_id
+        data_tests: [unique, not_null]
+      - name: payer_name
+        data_tests: [not_null]
+
+  - name: fct_visits
+    description: Visits for the example payer only. History, the open quarter, and future scheduled visits.
+    columns:
+      - name: visit_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: member_id
+        data_tests: [not_null]
+
+  - name: fct_members
+    description: Members for the example payer. is_overdue is the overdue goal grain.
+    columns:
+      - name: member_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: is_overdue
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: fct_care_gaps
+    description: Care gaps for the example payer.
+    columns:
+      - name: gap_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+
+  - name: fct_completed_visits
+    description: Completed in-home visits for the example payer from the quarter start through the as-of date.
+    columns:
+      - name: visit_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: days_to_complete
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["completed"]
+
+  - name: fct_terminal_visits
+    description: Finished visits in the quarter window. Scheduled future visits are not included.
+    columns:
+      - name: visit_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["completed", "canceled", "no_show"]
+
+  - name: fct_er_after_miss
+    description: One row per example-payer member with an ER visit after a missed home visit in the quarter.
+    columns:
+      - name: member_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+
+  - name: mart_goal_status
+    description: One row per goal. Status is on track, at risk, or behind. The page reads this table.
+    columns:
+      - name: goal_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["on_track", "at_risk", "behind"]
+      - name: delta_label
+        data_tests: [not_null]
+      - name: current_value
+        data_tests: [not_null]
+      - name: target_value
+        data_tests: [not_null]
+
+  - name: mart_visit_pace
+    description: One row per day in the quarter. Actual is cumulative and stops on the as-of date. Pace is a straight line to the goal.
+    columns:
+      - name: date_day
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: cumulative_pace
+        data_tests: [not_null]
+
+  - name: mart_weekly_trend
+    description: Complete weeks only, for the three supporting goals. The open week is excluded.
+    columns:
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: trend_value
+        data_tests: [not_null]
+
+  - name: mart_actions_this_week
+    description: Three to five actions. Each sentence is written from the marts.
+    columns:
+      - name: action_id
+        data_tests: [unique, not_null]
+      - name: payer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_payer')
+                field: payer_id
+      - name: sentence
+        data_tests: [not_null]
+      - name: metric_value
+        data_tests: [not_null]

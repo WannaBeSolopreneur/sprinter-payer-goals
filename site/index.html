@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harborline goals demo</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <div>
+        <p class="brand" id="brand"></p>
+        <p class="role" id="role"></p>
+      </div>
+      <p class="by" id="by"></p>
+    </div>
+  </header>
+  <main class="wrap">
+    <h1 id="hero-line"></h1>
+    <p class="disclaimer" id="disclaimer"></p>
+    <p class="scope" id="scope"></p>
+    <p class="asof" id="asof"></p>
+    <section id="primary" aria-label="Primary goal"></section>
+    <section>
+      <h2>Other goals</h2>
+      <div id="support" class="support"></div>
+    </section>
+    <div class="story">
+      <article>
+        <h2 id="problem-title"></h2>
+        <p id="problem"></p>
+      </article>
+      <article>
+        <h2 id="solution-title"></h2>
+        <p id="solution"></p>
+      </article>
+    </div>
+    <section>
+      <h2>Actions this week</h2>
+      <ol id="actions" class="actions"></ol>
+    </section>
+    <details class="how" id="how">
+      <summary>How it's built</summary>
+      <div id="how-body"></div>
+    </details>
+    <section class="about" id="about"></section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <p id="footer-line"></p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

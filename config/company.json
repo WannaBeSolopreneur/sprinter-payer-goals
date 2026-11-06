@@ -1,0 +1,14 @@
+{
+  "product": "Sprinter Health",
+  "role": "Analytics Engineer (Senior)",
+  "builtBy": "Built by Asad Moulvi",
+  "hero": "A small demo I built for Sprinter Health.",
+  "disclaimer": "Independent demo using example data. Not affiliated with Sprinter Health.",
+  "exampleNote": "Fake example payer. Not a real Sprinter customer.",
+  "problemTitle": "Problem",
+  "problem": "Payers and internal teams can disagree on what a completed visit or an overdue member means. Skipped home care shows up too late.",
+  "solutionTitle": "Solution",
+  "solution": "One dbt layer defines each goal, with tests. A payer partner sees only their own rows. This page reads the same goal table the warehouse uses.",
+  "chartCaption": "Solid line is cumulative completed visits. Dashed line is a straight pace to the quarter goal. The pace line continues after the as-of date.",
+  "footer": "Independent demo using example data. Not affiliated with Sprinter Health."
+}
