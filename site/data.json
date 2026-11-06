@@ -1,0 +1,1054 @@
+{
+  "company": {
+    "product": "Sprinter Health",
+    "role": "Analytics Engineer (Senior)",
+    "builtBy": "Built by Asad Moulvi",
+    "hero": "A small demo I built for Sprinter Health.",
+    "disclaimer": "Independent demo using example data. Not affiliated with Sprinter Health.",
+    "exampleNote": "Fake example payer. Not a real Sprinter customer.",
+    "problemTitle": "Problem",
+    "problem": "Payers and internal teams can disagree on what a completed visit or an overdue member means. Skipped home care shows up too late.",
+    "solutionTitle": "Solution",
+    "solution": "One dbt layer defines each goal, with tests. A payer partner sees only their own rows. This page reads the same goal table the warehouse uses.",
+    "chartCaption": "Solid line is cumulative completed visits. Dashed line is a straight pace to the quarter goal. The pace line continues after the as-of date.",
+    "footer": "Independent demo using example data. Not affiliated with Sprinter Health."
+  },
+  "profile": {
+    "name": "Asad Moulvi",
+    "title": "Data Scientist",
+    "employer": "DataQHealth",
+    "location": "Dallas, TX",
+    "relocate": "Willing to relocate to San Francisco and work in office.",
+    "education": [
+      "MS in Business Analytics and AI from UT Dallas (2025, 3.8 GPA)",
+      "BSc Physics from the University of Nottingham (2020)"
+    ],
+    "highlights": [
+      "Builds healthcare data pipelines that process 10M+ records a year, including claims, encounters, and patient attribution.",
+      "Has worked in healthcare data for 5 years.",
+      "Built a FHIR-compliant AI scribe for doctors.",
+      "Built Snowflake ETL that loaded a client's data into their Snowflake warehouse, and holds a Snowflake certification.",
+      "Familiar with FHIR, HL7 v2, C-CDA, X12 837/835, ICD-10, CPT, SNOMED, LOINC, RxNorm, and HIPAA.",
+      "Built a PyTorch NLP system that summarizes cardiac device alerts and saves nurses 3 hours a day.",
+      "Solo-runs 3 production apps with about 4,500 users total."
+    ],
+    "demoNote": "This demo is built in dbt.",
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/WannaBeSolopreneur"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/asad-moulvi-aaa278175"
+      },
+      {
+        "label": "asad.moulvi01@gmail.com",
+        "href": "mailto:asad.moulvi01@gmail.com"
+      }
+    ]
+  },
+  "goals": [
+    {
+      "id": "visits_completed",
+      "payerId": "payer_harborline",
+      "label": "Visits completed",
+      "subtitle": "Completed in-home visits this quarter",
+      "sparkCaption": null,
+      "unit": "count",
+      "kind": "pace",
+      "direction": "higher",
+      "tileRole": "primary",
+      "currentValue": 640.0,
+      "targetValue": 1800.0,
+      "progressRatio": 0.35555555555555557,
+      "paceRatio": 0.40217391304347827,
+      "pctOfPace": 0.8840840840840841,
+      "status": "at_risk",
+      "statusLabel": "At risk",
+      "deltaLabel": "Behind pace by 84 visits",
+      "sortOrder": 1,
+      "currentLabel": "640",
+      "targetLabel": "1800",
+      "quarterShareLabel": "35.6% of the quarter goal",
+      "paceShareLabel": "88.4% of pace",
+      "sparkline": []
+    },
+    {
+      "id": "median_days",
+      "payerId": "payer_harborline",
+      "label": "Days to a visit",
+      "subtitle": "Median days from referral to a completed visit",
+      "sparkCaption": "Median days by complete week",
+      "unit": "days",
+      "kind": "snapshot",
+      "direction": "lower",
+      "tileRole": "support",
+      "currentValue": 8.0,
+      "targetValue": 7.0,
+      "progressRatio": 0.875,
+      "paceRatio": null,
+      "pctOfPace": null,
+      "status": "at_risk",
+      "statusLabel": "At risk",
+      "deltaLabel": "Over the target by 1 day",
+      "sortOrder": 2,
+      "currentLabel": "8 days",
+      "targetLabel": "7 days",
+      "sparkline": [
+        {
+          "label": "Aug 10",
+          "value": 6.5
+        },
+        {
+          "label": "Aug 17",
+          "value": 6.5
+        },
+        {
+          "label": "Aug 24",
+          "value": 6.5
+        },
+        {
+          "label": "Aug 31",
+          "value": 6.5
+        },
+        {
+          "label": "Sep 7",
+          "value": 6.5
+        },
+        {
+          "label": "Sep 14",
+          "value": 6.5
+        },
+        {
+          "label": "Sep 21",
+          "value": 6.5
+        },
+        {
+          "label": "Sep 28",
+          "value": 7.0
+        },
+        {
+          "label": "Oct 5",
+          "value": 9.0
+        },
+        {
+          "label": "Oct 12",
+          "value": 7.0
+        },
+        {
+          "label": "Oct 19",
+          "value": 8.5
+        },
+        {
+          "label": "Oct 26",
+          "value": 7.0
+        }
+      ]
+    },
+    {
+      "id": "members_overdue",
+      "payerId": "payer_harborline",
+      "label": "Members overdue",
+      "subtitle": "Open preventive or chronic gaps",
+      "sparkCaption": "Open gaps at each complete week end",
+      "unit": "count",
+      "kind": "snapshot",
+      "direction": "lower",
+      "tileRole": "support",
+      "currentValue": 720.0,
+      "targetValue": 500.0,
+      "progressRatio": 0.6944444444444444,
+      "paceRatio": null,
+      "pctOfPace": null,
+      "status": "behind",
+      "statusLabel": "Behind",
+      "deltaLabel": "Over the target by 220 members",
+      "sortOrder": 3,
+      "currentLabel": "720",
+      "targetLabel": "500",
+      "sparkline": [
+        {
+          "label": "Aug 10",
+          "value": 650.0
+        },
+        {
+          "label": "Aug 17",
+          "value": 650.0
+        },
+        {
+          "label": "Aug 24",
+          "value": 650.0
+        },
+        {
+          "label": "Aug 31",
+          "value": 650.0
+        },
+        {
+          "label": "Sep 7",
+          "value": 650.0
+        },
+        {
+          "label": "Sep 14",
+          "value": 870.0
+        },
+        {
+          "label": "Sep 21",
+          "value": 870.0
+        },
+        {
+          "label": "Sep 28",
+          "value": 848.0
+        },
+        {
+          "label": "Oct 5",
+          "value": 805.0
+        },
+        {
+          "label": "Oct 12",
+          "value": 762.0
+        },
+        {
+          "label": "Oct 19",
+          "value": 720.0
+        },
+        {
+          "label": "Oct 26",
+          "value": 720.0
+        }
+      ]
+    },
+    {
+      "id": "visit_completion_rate",
+      "payerId": "payer_harborline",
+      "label": "Visit completion",
+      "subtitle": "Completed visits divided by finished visits",
+      "sparkCaption": "Completion rate by complete week",
+      "unit": "percent",
+      "kind": "snapshot",
+      "direction": "higher",
+      "tileRole": "support",
+      "currentValue": 0.7804878048780488,
+      "targetValue": 0.85,
+      "progressRatio": 0.9182209469153516,
+      "paceRatio": null,
+      "pctOfPace": null,
+      "status": "at_risk",
+      "statusLabel": "At risk",
+      "deltaLabel": "Short of the target by 7 points",
+      "sortOrder": 4,
+      "currentLabel": "78%",
+      "targetLabel": "85%",
+      "sparkline": [
+        {
+          "label": "Aug 10",
+          "value": 0.8571428571428571
+        },
+        {
+          "label": "Aug 17",
+          "value": 0.8571428571428571
+        },
+        {
+          "label": "Aug 24",
+          "value": 0.8571428571428571
+        },
+        {
+          "label": "Aug 31",
+          "value": 0.8571428571428571
+        },
+        {
+          "label": "Sep 7",
+          "value": 0.8571428571428571
+        },
+        {
+          "label": "Sep 14",
+          "value": 0.8571428571428571
+        },
+        {
+          "label": "Sep 21",
+          "value": 0.8571428571428571
+        },
+        {
+          "label": "Sep 28",
+          "value": 0.6904761904761905
+        },
+        {
+          "label": "Oct 5",
+          "value": 0.6521739130434783
+        },
+        {
+          "label": "Oct 12",
+          "value": 0.6521739130434783
+        },
+        {
+          "label": "Oct 19",
+          "value": 1.0
+        },
+        {
+          "label": "Oct 26",
+          "value": 1.0
+        }
+      ]
+    }
+  ],
+  "pace": [
+    {
+      "day": "2026-10-01 00:00:00",
+      "actual": 22,
+      "pace": 19.565217391304348,
+      "label": "Oct 1"
+    },
+    {
+      "day": "2026-10-02 00:00:00",
+      "actual": 44,
+      "pace": 39.130434782608695,
+      "label": "Oct 2"
+    },
+    {
+      "day": "2026-10-03 00:00:00",
+      "actual": 60,
+      "pace": 58.69565217391305,
+      "label": "Oct 3"
+    },
+    {
+      "day": "2026-10-04 00:00:00",
+      "actual": 69,
+      "pace": 78.26086956521739,
+      "label": "Oct 4"
+    },
+    {
+      "day": "2026-10-05 00:00:00",
+      "actual": 91,
+      "pace": 97.82608695652173,
+      "label": "Oct 5"
+    },
+    {
+      "day": "2026-10-06 00:00:00",
+      "actual": 113,
+      "pace": 117.3913043478261,
+      "label": "Oct 6"
+    },
+    {
+      "day": "2026-10-07 00:00:00",
+      "actual": 135,
+      "pace": 136.95652173913044,
+      "label": "Oct 7"
+    },
+    {
+      "day": "2026-10-08 00:00:00",
+      "actual": 157,
+      "pace": 156.52173913043478,
+      "label": "Oct 8"
+    },
+    {
+      "day": "2026-10-09 00:00:00",
+      "actual": 179,
+      "pace": 176.08695652173913,
+      "label": "Oct 9"
+    },
+    {
+      "day": "2026-10-10 00:00:00",
+      "actual": 195,
+      "pace": 195.65217391304347,
+      "label": "Oct 10"
+    },
+    {
+      "day": "2026-10-11 00:00:00",
+      "actual": 204,
+      "pace": 215.2173913043478,
+      "label": "Oct 11"
+    },
+    {
+      "day": "2026-10-12 00:00:00",
+      "actual": 226,
+      "pace": 234.7826086956522,
+      "label": "Oct 12"
+    },
+    {
+      "day": "2026-10-13 00:00:00",
+      "actual": 248,
+      "pace": 254.34782608695653,
+      "label": "Oct 13"
+    },
+    {
+      "day": "2026-10-14 00:00:00",
+      "actual": 270,
+      "pace": 273.9130434782609,
+      "label": "Oct 14"
+    },
+    {
+      "day": "2026-10-15 00:00:00",
+      "actual": 292,
+      "pace": 293.4782608695652,
+      "label": "Oct 15"
+    },
+    {
+      "day": "2026-10-16 00:00:00",
+      "actual": 314,
+      "pace": 313.04347826086956,
+      "label": "Oct 16"
+    },
+    {
+      "day": "2026-10-17 00:00:00",
+      "actual": 330,
+      "pace": 332.60869565217394,
+      "label": "Oct 17"
+    },
+    {
+      "day": "2026-10-18 00:00:00",
+      "actual": 339,
+      "pace": 352.17391304347825,
+      "label": "Oct 18"
+    },
+    {
+      "day": "2026-10-19 00:00:00",
+      "actual": 361,
+      "pace": 371.7391304347826,
+      "label": "Oct 19"
+    },
+    {
+      "day": "2026-10-20 00:00:00",
+      "actual": 383,
+      "pace": 391.30434782608694,
+      "label": "Oct 20"
+    },
+    {
+      "day": "2026-10-21 00:00:00",
+      "actual": 405,
+      "pace": 410.8695652173913,
+      "label": "Oct 21"
+    },
+    {
+      "day": "2026-10-22 00:00:00",
+      "actual": 427,
+      "pace": 430.4347826086956,
+      "label": "Oct 22"
+    },
+    {
+      "day": "2026-10-23 00:00:00",
+      "actual": 449,
+      "pace": 450.0,
+      "label": "Oct 23"
+    },
+    {
+      "day": "2026-10-24 00:00:00",
+      "actual": 465,
+      "pace": 469.5652173913044,
+      "label": "Oct 24"
+    },
+    {
+      "day": "2026-10-25 00:00:00",
+      "actual": 473,
+      "pace": 489.1304347826087,
+      "label": "Oct 25"
+    },
+    {
+      "day": "2026-10-26 00:00:00",
+      "actual": 488,
+      "pace": 508.69565217391306,
+      "label": "Oct 26"
+    },
+    {
+      "day": "2026-10-27 00:00:00",
+      "actual": 503,
+      "pace": 528.2608695652174,
+      "label": "Oct 27"
+    },
+    {
+      "day": "2026-10-28 00:00:00",
+      "actual": 518,
+      "pace": 547.8260869565217,
+      "label": "Oct 28"
+    },
+    {
+      "day": "2026-10-29 00:00:00",
+      "actual": 533,
+      "pace": 567.3913043478261,
+      "label": "Oct 29"
+    },
+    {
+      "day": "2026-10-30 00:00:00",
+      "actual": 548,
+      "pace": 586.9565217391304,
+      "label": "Oct 30"
+    },
+    {
+      "day": "2026-10-31 00:00:00",
+      "actual": 559,
+      "pace": 606.5217391304348,
+      "label": "Oct 31"
+    },
+    {
+      "day": "2026-11-01 00:00:00",
+      "actual": 565,
+      "pace": 626.0869565217391,
+      "label": "Nov 1"
+    },
+    {
+      "day": "2026-11-02 00:00:00",
+      "actual": 580,
+      "pace": 645.6521739130435,
+      "label": "Nov 2"
+    },
+    {
+      "day": "2026-11-03 00:00:00",
+      "actual": 595,
+      "pace": 665.2173913043479,
+      "label": "Nov 3"
+    },
+    {
+      "day": "2026-11-04 00:00:00",
+      "actual": 610,
+      "pace": 684.7826086956521,
+      "label": "Nov 4"
+    },
+    {
+      "day": "2026-11-05 00:00:00",
+      "actual": 625,
+      "pace": 704.3478260869565,
+      "label": "Nov 5"
+    },
+    {
+      "day": "2026-11-06 00:00:00",
+      "actual": 640,
+      "pace": 723.9130434782609,
+      "label": "Nov 6"
+    },
+    {
+      "day": "2026-11-07 00:00:00",
+      "actual": null,
+      "pace": 743.4782608695652,
+      "label": "Nov 7"
+    },
+    {
+      "day": "2026-11-08 00:00:00",
+      "actual": null,
+      "pace": 763.0434782608696,
+      "label": "Nov 8"
+    },
+    {
+      "day": "2026-11-09 00:00:00",
+      "actual": null,
+      "pace": 782.6086956521739,
+      "label": "Nov 9"
+    },
+    {
+      "day": "2026-11-10 00:00:00",
+      "actual": null,
+      "pace": 802.1739130434783,
+      "label": "Nov 10"
+    },
+    {
+      "day": "2026-11-11 00:00:00",
+      "actual": null,
+      "pace": 821.7391304347826,
+      "label": "Nov 11"
+    },
+    {
+      "day": "2026-11-12 00:00:00",
+      "actual": null,
+      "pace": 841.304347826087,
+      "label": "Nov 12"
+    },
+    {
+      "day": "2026-11-13 00:00:00",
+      "actual": null,
+      "pace": 860.8695652173913,
+      "label": "Nov 13"
+    },
+    {
+      "day": "2026-11-14 00:00:00",
+      "actual": null,
+      "pace": 880.4347826086956,
+      "label": "Nov 14"
+    },
+    {
+      "day": "2026-11-15 00:00:00",
+      "actual": null,
+      "pace": 900.0,
+      "label": "Nov 15"
+    },
+    {
+      "day": "2026-11-16 00:00:00",
+      "actual": null,
+      "pace": 919.5652173913044,
+      "label": "Nov 16"
+    },
+    {
+      "day": "2026-11-17 00:00:00",
+      "actual": null,
+      "pace": 939.1304347826087,
+      "label": "Nov 17"
+    },
+    {
+      "day": "2026-11-18 00:00:00",
+      "actual": null,
+      "pace": 958.695652173913,
+      "label": "Nov 18"
+    },
+    {
+      "day": "2026-11-19 00:00:00",
+      "actual": null,
+      "pace": 978.2608695652174,
+      "label": "Nov 19"
+    },
+    {
+      "day": "2026-11-20 00:00:00",
+      "actual": null,
+      "pace": 997.8260869565217,
+      "label": "Nov 20"
+    },
+    {
+      "day": "2026-11-21 00:00:00",
+      "actual": null,
+      "pace": 1017.3913043478261,
+      "label": "Nov 21"
+    },
+    {
+      "day": "2026-11-22 00:00:00",
+      "actual": null,
+      "pace": 1036.9565217391305,
+      "label": "Nov 22"
+    },
+    {
+      "day": "2026-11-23 00:00:00",
+      "actual": null,
+      "pace": 1056.5217391304348,
+      "label": "Nov 23"
+    },
+    {
+      "day": "2026-11-24 00:00:00",
+      "actual": null,
+      "pace": 1076.0869565217392,
+      "label": "Nov 24"
+    },
+    {
+      "day": "2026-11-25 00:00:00",
+      "actual": null,
+      "pace": 1095.6521739130435,
+      "label": "Nov 25"
+    },
+    {
+      "day": "2026-11-26 00:00:00",
+      "actual": null,
+      "pace": 1115.2173913043478,
+      "label": "Nov 26"
+    },
+    {
+      "day": "2026-11-27 00:00:00",
+      "actual": null,
+      "pace": 1134.7826086956522,
+      "label": "Nov 27"
+    },
+    {
+      "day": "2026-11-28 00:00:00",
+      "actual": null,
+      "pace": 1154.3478260869565,
+      "label": "Nov 28"
+    },
+    {
+      "day": "2026-11-29 00:00:00",
+      "actual": null,
+      "pace": 1173.9130434782608,
+      "label": "Nov 29"
+    },
+    {
+      "day": "2026-11-30 00:00:00",
+      "actual": null,
+      "pace": 1193.4782608695652,
+      "label": "Nov 30"
+    },
+    {
+      "day": "2026-12-01 00:00:00",
+      "actual": null,
+      "pace": 1213.0434782608695,
+      "label": "Dec 1"
+    },
+    {
+      "day": "2026-12-02 00:00:00",
+      "actual": null,
+      "pace": 1232.608695652174,
+      "label": "Dec 2"
+    },
+    {
+      "day": "2026-12-03 00:00:00",
+      "actual": null,
+      "pace": 1252.1739130434783,
+      "label": "Dec 3"
+    },
+    {
+      "day": "2026-12-04 00:00:00",
+      "actual": null,
+      "pace": 1271.7391304347825,
+      "label": "Dec 4"
+    },
+    {
+      "day": "2026-12-05 00:00:00",
+      "actual": null,
+      "pace": 1291.304347826087,
+      "label": "Dec 5"
+    },
+    {
+      "day": "2026-12-06 00:00:00",
+      "actual": null,
+      "pace": 1310.8695652173913,
+      "label": "Dec 6"
+    },
+    {
+      "day": "2026-12-07 00:00:00",
+      "actual": null,
+      "pace": 1330.4347826086957,
+      "label": "Dec 7"
+    },
+    {
+      "day": "2026-12-08 00:00:00",
+      "actual": null,
+      "pace": 1350.0,
+      "label": "Dec 8"
+    },
+    {
+      "day": "2026-12-09 00:00:00",
+      "actual": null,
+      "pace": 1369.5652173913043,
+      "label": "Dec 9"
+    },
+    {
+      "day": "2026-12-10 00:00:00",
+      "actual": null,
+      "pace": 1389.1304347826087,
+      "label": "Dec 10"
+    },
+    {
+      "day": "2026-12-11 00:00:00",
+      "actual": null,
+      "pace": 1408.695652173913,
+      "label": "Dec 11"
+    },
+    {
+      "day": "2026-12-12 00:00:00",
+      "actual": null,
+      "pace": 1428.2608695652175,
+      "label": "Dec 12"
+    },
+    {
+      "day": "2026-12-13 00:00:00",
+      "actual": null,
+      "pace": 1447.8260869565217,
+      "label": "Dec 13"
+    },
+    {
+      "day": "2026-12-14 00:00:00",
+      "actual": null,
+      "pace": 1467.391304347826,
+      "label": "Dec 14"
+    },
+    {
+      "day": "2026-12-15 00:00:00",
+      "actual": null,
+      "pace": 1486.9565217391305,
+      "label": "Dec 15"
+    },
+    {
+      "day": "2026-12-16 00:00:00",
+      "actual": null,
+      "pace": 1506.5217391304348,
+      "label": "Dec 16"
+    },
+    {
+      "day": "2026-12-17 00:00:00",
+      "actual": null,
+      "pace": 1526.0869565217392,
+      "label": "Dec 17"
+    },
+    {
+      "day": "2026-12-18 00:00:00",
+      "actual": null,
+      "pace": 1545.6521739130435,
+      "label": "Dec 18"
+    },
+    {
+      "day": "2026-12-19 00:00:00",
+      "actual": null,
+      "pace": 1565.2173913043478,
+      "label": "Dec 19"
+    },
+    {
+      "day": "2026-12-20 00:00:00",
+      "actual": null,
+      "pace": 1584.7826086956522,
+      "label": "Dec 20"
+    },
+    {
+      "day": "2026-12-21 00:00:00",
+      "actual": null,
+      "pace": 1604.3478260869565,
+      "label": "Dec 21"
+    },
+    {
+      "day": "2026-12-22 00:00:00",
+      "actual": null,
+      "pace": 1623.9130434782608,
+      "label": "Dec 22"
+    },
+    {
+      "day": "2026-12-23 00:00:00",
+      "actual": null,
+      "pace": 1643.4782608695652,
+      "label": "Dec 23"
+    },
+    {
+      "day": "2026-12-24 00:00:00",
+      "actual": null,
+      "pace": 1663.0434782608695,
+      "label": "Dec 24"
+    },
+    {
+      "day": "2026-12-25 00:00:00",
+      "actual": null,
+      "pace": 1682.608695652174,
+      "label": "Dec 25"
+    },
+    {
+      "day": "2026-12-26 00:00:00",
+      "actual": null,
+      "pace": 1702.1739130434783,
+      "label": "Dec 26"
+    },
+    {
+      "day": "2026-12-27 00:00:00",
+      "actual": null,
+      "pace": 1721.7391304347825,
+      "label": "Dec 27"
+    },
+    {
+      "day": "2026-12-28 00:00:00",
+      "actual": null,
+      "pace": 1741.304347826087,
+      "label": "Dec 28"
+    },
+    {
+      "day": "2026-12-29 00:00:00",
+      "actual": null,
+      "pace": 1760.8695652173913,
+      "label": "Dec 29"
+    },
+    {
+      "day": "2026-12-30 00:00:00",
+      "actual": null,
+      "pace": 1780.4347826086957,
+      "label": "Dec 30"
+    },
+    {
+      "day": "2026-12-31 00:00:00",
+      "actual": null,
+      "pace": 1800.0,
+      "label": "Dec 31"
+    }
+  ],
+  "actions": [
+    {
+      "id": "pace",
+      "sortOrder": 1,
+      "title": "Catch the visit pace",
+      "metricValue": 640.0,
+      "sentence": "640 in-home visits are completed. The quarter goal is 1800. Behind pace by 84 visits."
+    },
+    {
+      "id": "overdue",
+      "sortOrder": 2,
+      "title": "Book overdue members",
+      "metricValue": 720.0,
+      "sentence": "720 members are overdue for preventive or chronic home care. The target is 500 or fewer. Book the oldest gaps first."
+    },
+    {
+      "id": "er_after_miss",
+      "sortOrder": 3,
+      "title": "Call after a missed visit",
+      "metricValue": 48.0,
+      "sentence": "48 members had an ER visit within 30 days of a missed home visit this quarter. Call that list this week."
+    },
+    {
+      "id": "no_shows",
+      "sortOrder": 4,
+      "title": "Reschedule no-shows",
+      "metricValue": 65.0,
+      "sentence": "65 visits were no-shows this quarter. Completion is 78% against an 85% target. Offer those members a new time."
+    },
+    {
+      "id": "waiting_referrals",
+      "sortOrder": 5,
+      "title": "Schedule referrals with no visit",
+      "metricValue": 90.0,
+      "sentence": "90 referrals are more than 14 days old and still have no visit scheduled. Put them on the schedule this week."
+    }
+  ],
+  "build": {
+    "checks": 164,
+    "dataTests": 138,
+    "passed": 164,
+    "modelCount": 26,
+    "layers": {
+      "staging": [
+        {
+          "name": "stg_calendar",
+          "description": "Quarter bounds and the 0.95 and 0.80 status cutoffs."
+        },
+        {
+          "name": "stg_care_gaps",
+          "description": "One row per preventive or chronic gap. Closed gaps have a closed date."
+        },
+        {
+          "name": "stg_er_events",
+          "description": "One row per synthetic ER event tied to a missed visit."
+        },
+        {
+          "name": "stg_generation_meta",
+          "description": "One row of seed, as-of date, and history start."
+        },
+        {
+          "name": "stg_goals",
+          "description": "One row per quarter goal and its target. The page does not store a second target."
+        },
+        {
+          "name": "stg_members",
+          "description": "One row per synthetic member. These are not real people."
+        },
+        {
+          "name": "stg_payers",
+          "description": "One row per synthetic payer, including the two payers the page does not show."
+        },
+        {
+          "name": "stg_referrals",
+          "description": "One row per referral after types are kept as sent."
+        },
+        {
+          "name": "stg_visits",
+          "description": "One row per visit after the latest ingest wins. Status is lower case."
+        },
+        {
+          "name": "stg_weeks",
+          "description": "Complete Monday to Sunday weeks used for sparklines. The open week is not here."
+        }
+      ],
+      "intermediate": [
+        {
+          "name": "int_calendar",
+          "description": "One row with the quarter, the as-of date, and the day counts."
+        },
+        {
+          "name": "int_er_after_miss",
+          "description": "ER events 1 to 30 days after a missed visit, with no completed home visit between them. All payers."
+        },
+        {
+          "name": "int_members",
+          "description": "One row per member for every payer. is_overdue is 1 when a preventive or chronic gap is open."
+        },
+        {
+          "name": "int_visits",
+          "description": "One row per visit for every payer, with the referral clock repaired."
+        }
+      ],
+      "spine": [
+        {
+          "name": "metric_time_spine",
+          "description": "One row per day from the history start through the quarter end."
+        }
+      ],
+      "marts": [
+        {
+          "name": "dim_payer",
+          "description": "The one payer this build is allowed to publish."
+        },
+        {
+          "name": "fct_care_gaps",
+          "description": "Care gaps for the example payer."
+        },
+        {
+          "name": "fct_completed_visits",
+          "description": "Completed in-home visits for the example payer from the quarter start through the as-of date."
+        },
+        {
+          "name": "fct_er_after_miss",
+          "description": "One row per example-payer member with an ER visit after a missed home visit in the quarter."
+        },
+        {
+          "name": "fct_members",
+          "description": "Members for the example payer. is_overdue is the overdue goal grain."
+        },
+        {
+          "name": "fct_terminal_visits",
+          "description": "Finished visits in the quarter window. Scheduled future visits are not included."
+        },
+        {
+          "name": "fct_visits",
+          "description": "Visits for the example payer only. History, the open quarter, and future scheduled visits."
+        },
+        {
+          "name": "mart_actions_this_week",
+          "description": "Three to five actions. Each sentence is written from the marts."
+        },
+        {
+          "name": "mart_goal_status",
+          "description": "One row per goal. Status is on track, at risk, or behind. The page reads this table."
+        },
+        {
+          "name": "mart_visit_pace",
+          "description": "One row per day in the quarter. Actual is cumulative and stops on the as-of date. Pace is a straight line to the goal."
+        },
+        {
+          "name": "mart_weekly_trend",
+          "description": "Complete weeks only, for the three supporting goals. The open week is excluded."
+        }
+      ]
+    },
+    "metrics": [
+      {
+        "name": "visits_completed",
+        "label": "Visits completed",
+        "description": "Completed in-home visits for the example payer from the quarter start through the as-of date."
+      },
+      {
+        "name": "median_days_to_completed_visit",
+        "label": "Median days to a completed visit",
+        "description": "Median days from the referral date to the completed visit, for completed visits in the quarter window."
+      },
+      {
+        "name": "members_overdue",
+        "label": "Members overdue",
+        "description": "Members with a preventive or chronic gap that is due on or before the as-of date and is not closed yet."
+      },
+      {
+        "name": "terminal_visits",
+        "label": "Finished visits",
+        "description": "Visits in the quarter window that are completed, canceled, or no-show. This is the denominator of visit completion."
+      },
+      {
+        "name": "visit_completion_rate",
+        "label": "Visit completion rate",
+        "description": "Completed visits divided by finished visits in the quarter window. Scheduled visits are not in the rate."
+      },
+      {
+        "name": "er_after_missed_visit_members",
+        "label": "ER after a missed visit",
+        "description": "Members with an ER event 1 to 30 days after a missed home visit in the quarter, and no completed home visit between the miss and the ER event."
+      }
+    ]
+  },
+  "payer": {
+    "id": "payer_harborline",
+    "name": "Harborline Health Plan",
+    "note": "Fake example payer. Not a real Sprinter customer."
+  },
+  "calendar": {
+    "asOf": "2026-11-06",
+    "quarterLabel": "Q4 2026",
+    "daysElapsed": 37,
+    "daysInPeriod": 92,
+    "onTrackRatio": 0.95,
+    "atRiskRatio": 0.8,
+    "asOfLabel": "Nov 6, 2026",
+    "line": "Through Nov 6, 2026. Day 37 of 92 in Q4 2026.",
+    "statusRule": "On track means 95% of pace or better. At risk means from 80% up to 95%. Behind means under 80%. Snapshot goals use the same cutoffs against the full target. When a lower number is better, on track means the value is at or under the target divided by the on-track cutoff."
+  },
+  "warehouseSentence": "The warehouse has 3 payers. This page keeps Harborline Health Plan only. Cedar Ridge Health and Northwind Mutual stay upstream and are dropped from the marts. Harborline Health Plan has 8000 members and 3776 visits in the published facts."
+}

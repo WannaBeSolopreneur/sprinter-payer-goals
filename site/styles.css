@@ -1,0 +1,392 @@
+:root {
+  --navy: #1b2a41;
+  --powder: #a7c7e7;
+  --powder-soft: rgba(167, 199, 231, 0.45);
+  --green: #1f6b4a;
+  --amber: #8a6a12;
+  --rose: #8c3d52;
+  --ink: #1b2a41;
+  --muted: #3e5168;
+  --paper: #f4f7fb;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 380px at 0% -10%, rgba(167, 199, 231, 0.75), transparent 60%),
+    var(--paper);
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", "Liberation Sans", sans-serif;
+  line-height: 1.45;
+}
+
+.wrap {
+  width: min(1080px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.site-header {
+  background: var(--navy);
+  color: #fff;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+
+.brand,
+.role,
+.by,
+h1,
+h2,
+p { margin: 0; }
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.role,
+.by {
+  color: var(--powder);
+  font-size: 0.95rem;
+}
+
+main { padding: 1.4rem 0 2.4rem; }
+
+h1 {
+  font-size: clamp(1.7rem, 4vw, 2.35rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  max-width: 18ch;
+}
+
+h2 {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+.disclaimer {
+  margin-top: 0.7rem;
+  font-weight: 700;
+  max-width: 46rem;
+}
+
+.scope,
+.asof {
+  margin-top: 0.35rem;
+  color: var(--muted);
+}
+
+.story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.story article,
+.hero,
+.goal,
+.actions li,
+.about,
+.how {
+  background: var(--card);
+  border: 1px solid var(--powder);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(27, 42, 65, 0.05);
+}
+
+.story article,
+.about,
+.how { padding: 0.9rem 1rem; }
+
+.story p,
+.about p { max-width: 62ch; }
+
+.asof { margin: 0.9rem 0 0.7rem; }
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 0.5rem 1rem;
+  padding: 1rem 1rem 0.8rem;
+  align-items: center;
+}
+
+.hero h2 {
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.goal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.pill {
+  flex: none;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+}
+
+.on_track .pill,
+.on_track .bar span { background: var(--green); }
+
+.at_risk .pill,
+.at_risk .bar span { background: var(--amber); }
+
+.behind .pill,
+.behind .bar span { background: var(--rose); }
+
+.hero-value {
+  font-size: clamp(3rem, 7vw, 4.4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0.35rem 0 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-target,
+.goal-target,
+.delta,
+.spark-caption,
+.quiet {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.pace-share {
+  margin-top: 0.35rem;
+  font-weight: 700;
+}
+
+.bar {
+  position: relative;
+  height: 10px;
+  margin: 0.7rem 0 0.45rem;
+  border-radius: 999px;
+  background: var(--powder-soft);
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  max-width: 100%;
+}
+
+.pace-tick {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 18px;
+  background: var(--navy);
+}
+
+.chart-wrap {
+  height: 260px;
+  min-width: 0;
+}
+
+.chart-caption {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+section { margin-top: 1.15rem; }
+
+.support {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.goal { padding: 0.85rem 0.9rem 0.75rem; }
+
+.goal h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.goal-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0.35rem 0 0.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.spark {
+  height: 64px;
+  margin-top: 0.45rem;
+}
+
+.actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.actions li {
+  padding: 0.75rem 0.9rem;
+  border-left: 5px solid var(--navy);
+}
+
+.actions strong { display: block; }
+
+.how { margin-top: 1.15rem; }
+
+.how summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.how summary:focus {
+  outline: 2px solid var(--powder);
+  outline-offset: 3px;
+}
+
+.how-body { margin-top: 0.8rem; }
+
+.how img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--powder);
+}
+
+.counts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin: 0.8rem 0;
+}
+
+.count {
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+}
+
+.count b {
+  display: block;
+  font-size: 1.5rem;
+}
+
+.count span { color: var(--muted); font-size: 0.85rem; }
+
+.layers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem 1.2rem;
+  margin-top: 0.6rem;
+}
+
+.layers h3,
+.metrics h3 {
+  margin: 0.8rem 0 0.3rem;
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.layers ul,
+.metrics { margin: 0; padding: 0; list-style: none; }
+
+.layers li,
+.metric {
+  margin: 0.35rem 0 0.55rem;
+}
+
+.layers code,
+.metric code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.86rem;
+}
+
+.layers li span,
+.metric p {
+  display: block;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.about { margin-top: 1rem; }
+
+.about h2 {
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  font-size: 1.25rem;
+  margin-bottom: 0.15rem;
+}
+
+.about .role-line { color: var(--muted); margin-bottom: 0.55rem; }
+
+.about ul {
+  margin: 0.4rem 0;
+  padding-left: 1.1rem;
+}
+
+.about li { margin: 0.2rem 0; }
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  margin-top: 0.7rem;
+}
+
+.links a {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+footer {
+  padding: 0 0 1.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 800px) {
+  .header-row,
+  .hero,
+  .story,
+  .support,
+  .layers,
+  .counts {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .header-row { display: flex; flex-direction: column; align-items: flex-start; }
+
+  .chart-wrap { height: 210px; }
+
+  h1 { max-width: none; }
+}

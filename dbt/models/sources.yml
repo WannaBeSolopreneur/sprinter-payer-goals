@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Synthetic payer feed written by payer_model.generate. Not real patients.
+    schema: raw
+    tables:
+      - name: payers
+      - name: members
+      - name: referrals
+      - name: visits
+      - name: care_gaps
+      - name: er_events
+      - name: goals
+      - name: calendar
+      - name: generation_meta
+      - name: weeks

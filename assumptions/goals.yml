@@ -1,0 +1,52 @@
+# Quarter goals for the example payer only.
+# Status cutoffs live in assumptions/population.yml, not in the page.
+# Pace goals compare actual to target * days_elapsed / days_in_period.
+# On track is 95% of that pace or better. At risk is from 80% up to 95%.
+# Behind is under 80%. Snapshot goals use the same cutoffs against the full target.
+# A lower-is-better snapshot is on track when actual is at or under target / 0.95.
+
+goals:
+  - id: visits_completed
+    label: Visits completed
+    subtitle: Completed in-home visits this quarter
+    spark_caption:
+    unit: count
+    unit_singular: visit
+    unit_plural: visits
+    metric_kind: pace
+    direction: higher
+    target: 1800
+    sort_order: 1
+  - id: median_days
+    label: Days to a visit
+    subtitle: Median days from referral to a completed visit
+    spark_caption: Median days by complete week
+    unit: days
+    unit_singular: day
+    unit_plural: days
+    metric_kind: snapshot
+    direction: lower
+    target: 7
+    sort_order: 2
+  - id: members_overdue
+    label: Members overdue
+    subtitle: Open preventive or chronic gaps
+    spark_caption: Open gaps at each complete week end
+    unit: count
+    unit_singular: member
+    unit_plural: members
+    metric_kind: snapshot
+    direction: lower
+    target: 500
+    sort_order: 3
+  - id: visit_completion_rate
+    label: Visit completion
+    subtitle: Completed visits divided by finished visits
+    spark_caption: Completion rate by complete week
+    unit: percent
+    unit_singular: point
+    unit_plural: points
+    metric_kind: snapshot
+    direction: higher
+    target: 0.85
+    sort_order: 4

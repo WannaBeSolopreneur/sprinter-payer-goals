@@ -1,0 +1,26 @@
+{
+  "name": "Asad Moulvi",
+  "title": "Data Scientist",
+  "employer": "DataQHealth",
+  "location": "Dallas, TX",
+  "relocate": "Willing to relocate to San Francisco and work in office.",
+  "education": [
+    "MS in Business Analytics and AI from UT Dallas (2025, 3.8 GPA)",
+    "BSc Physics from the University of Nottingham (2020)"
+  ],
+  "highlights": [
+    "Builds healthcare data pipelines that process 10M+ records a year, including claims, encounters, and patient attribution.",
+    "Has worked in healthcare data for 5 years.",
+    "Built a FHIR-compliant AI scribe for doctors.",
+    "Built Snowflake ETL that loaded a client's data into their Snowflake warehouse, and holds a Snowflake certification.",
+    "Familiar with FHIR, HL7 v2, C-CDA, X12 837/835, ICD-10, CPT, SNOMED, LOINC, RxNorm, and HIPAA.",
+    "Built a PyTorch NLP system that summarizes cardiac device alerts and saves nurses 3 hours a day.",
+    "Solo-runs 3 production apps with about 4,500 users total."
+  ],
+  "demoNote": "This demo is built in dbt.",
+  "links": [
+    {"label": "GitHub", "href": "https://github.com/WannaBeSolopreneur"},
+    {"label": "LinkedIn", "href": "https://www.linkedin.com/in/asad-moulvi-aaa278175"},
+    {"label": "asad.moulvi01@gmail.com", "href": "mailto:asad.moulvi01@gmail.com"}
+  ]
+}
